@@ -1,3 +1,5 @@
+process.chdir(process.env.WORKING_DIR)
+
 const exec = require('child_process').exec
 const buttonListener = require('./button-listener')
 const relay = require ('./websocket-relay')
@@ -13,14 +15,19 @@ var server = http.createServer((req, res) => {
 })
 
 server.listen(8084)
+console.log('Serving static files at port :8084')
 
 relay.createRelay('doorbell')
 
-
-const stream = exec('sh ./start-stream.sh')
-stream.on('close', (code) => {
-   console.log('Stream closed')
-})
+const startStream = () => {
+	const stream = exec('sh ./start-stream.sh')
+	console.log('Started the video stream from the usb webcam')
+	stream.on('close', (code) => {
+	    console.log('Stream closed, restarting...')
+		setTimeout(startStream, 0)
+	})
+}
+startStream()
 
 io.on('connection', (socket) => {
    console.log('New socket.io connection')
