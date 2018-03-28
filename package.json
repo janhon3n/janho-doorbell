@@ -1,5 +1,5 @@
 {
-  "name": "koulukatu-doorbell",
+  "name": "janho-doorbell",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "face-recognition": "^0.8.1",
     "http-server": "^0.11.1",
+    "node-webcam": "^0.4.3",
     "onoff": "^2.0.0",
     "ws": "^5.1.0"
   }
