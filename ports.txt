@@ -1,0 +1,4 @@
+8080: socket.io
+8081: ffmpeg stream -> websocket relay
+8082: websocket relay stream -> browsers
+8084: http server serving view.html page
